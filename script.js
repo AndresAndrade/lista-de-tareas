@@ -1,27 +1,33 @@
-const btn = document.querySelector("[data-form-btn]")
+import checkComplete from "./Components/checkComplete.js";
+import deleteIcon from "./Components/deleteIcon.js";
 
-const createTask = (evento) => {
-    evento.preventDefault();
-    const input = document.querySelector("[data-form-input]");
-    const value = input.value;
-    const list = document.querySelector("[data-list]");
-    const task = document.createElement("li");
-    task.classList.add("card");
-    input.value = "";
-    const content =
-        `<div>
-            <i class="far fa-check-square icon"></i>
-            <span class="task">${value}</span>
-        </div>
-        <i class="fas fa-trash-alt trashIcon icon"></i>`
+//Immediately invoked function expression IIFE
+//(() => {
+    const btn = document.querySelector("[data-form-btn]")
 
-    task.innerHTML = content;
+    const createTask = (evento) => {
+        evento.preventDefault();
+        const input = document.querySelector("[data-form-input]");
+        const value = input.value;
+        const list = document.querySelector("[data-list]");//tag ul
+        const task = document.createElement("li");
+        task.classList.add("card");
+        input.value = "";
 
-    list.appendChild(task);
+        const taskContent = document.createElement("div");
+        const titleTask = document.createElement("span");
+        titleTask.classList.add("task");
+        titleTask.innerText = value;
+        taskContent.appendChild(checkComplete()); //Icono de check
+        taskContent.appendChild(titleTask); //la tarea
+        //task.innerHTML = content;
 
-    console.log(content);
-}
+        task.appendChild(taskContent);
+        task.appendChild(deleteIcon()); //Icono de borrar
+        list.appendChild(task);
 
-console.log(btn);
+    };
 
-btn.addEventListener("click",  createTask);
+    btn.addEventListener("click",  createTask);
+
+//})();
