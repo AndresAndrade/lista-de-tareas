@@ -1,33 +1,12 @@
-import checkComplete from "./Components/checkComplete.js";
-import deleteIcon from "./Components/deleteIcon.js";
+import {addTask} from "./Components/addTask.js";
+import {displayTasks} from "./Components/displayTasks.js";
 
 //Immediately invoked function expression IIFE
 //(() => {
     const btn = document.querySelector("[data-form-btn]")
 
-    const createTask = (evento) => {
-        evento.preventDefault();
-        const input = document.querySelector("[data-form-input]");
-        const value = input.value;
-        const list = document.querySelector("[data-list]");//tag ul
-        const task = document.createElement("li");
-        task.classList.add("card");
-        input.value = "";
+    btn.addEventListener("click",  addTask);
 
-        const taskContent = document.createElement("div");
-        const titleTask = document.createElement("span");
-        titleTask.classList.add("task");
-        titleTask.innerText = value;
-        taskContent.appendChild(checkComplete()); //Icono de check
-        taskContent.appendChild(titleTask); //la tarea
-        //task.innerHTML = content;
-
-        task.appendChild(taskContent);
-        task.appendChild(deleteIcon()); //Icono de borrar
-        list.appendChild(task);
-
-    };
-
-    btn.addEventListener("click",  createTask);
+    displayTasks();
 
 //})();
